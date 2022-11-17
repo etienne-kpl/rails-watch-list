@@ -1,2 +1,14 @@
 <h1><%= @list.name %></h1>
-<p>Find me in app/views/lists/show.html.erb</p>
+<h2>My collection</h2>
+<ul>
+  <% @bookmarks.each do |bookmark| %>
+    <li>
+      <%= Movie.find(bookmark.movie_id).title %>
+      <%= bookmark.comment %>
+      <%= link_to 'Delete bookmark', bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Add a movie', new_list_bookmark_path(@list), class: 'btn btn-warning' %>
+<%= link_to 'Back to list', lists_path, class: 'btn btn-success' %>
