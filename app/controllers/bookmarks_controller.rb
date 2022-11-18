@@ -6,6 +6,9 @@ class BookmarksController < ApplicationController
 
   def create
     @list = List.find(params[:list_id])
+    # bookmarks_done = Bookmark.all.select { |b| b.list_id == @list }
+    # bookmarks_done.map { |b| b = b.movie_id }
+    # @movies = Movie.all.reject { |movie| bookmarks_done.include?(movie.id) }
     @bookmark = Bookmark.new(bookmark_params)
     @bookmark.list = @list
     if @bookmark.save
