@@ -1,7 +1,23 @@
-<h1>Bookmarks#new</h1>
-<%= simple_form_for [@list, @bookmark] do |f| %>
-  <%= f.input :comment %>
-  <%# On associe la list de movies %>
-  <%= f.association :movie %>
-  <%= f.submit %>
-<% end %>
+<div class="banner mb-4" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(
+  <% if @list.photo.attached? %>
+    <%= cl_image_path @list.photo.key %>
+  <% else %>
+    <%= asset_path 'cinema.jpeg' %>
+  <% end %>);">
+  <div class="container">
+    <h1>Add a bookmark</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <%= simple_form_for [@list, @bookmark] do |f| %>
+        <%= f.input :comment %>
+        <%# On associe la list de movies %>
+        <%= f.association :movie %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+</div>

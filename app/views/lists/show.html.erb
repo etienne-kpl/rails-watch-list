@@ -1,27 +1,33 @@
-<h1><%= @list.name %></h1>
-<h2>My collection</h2>
-<div class="d-flex">
-  <%= link_to 'Add a movie', new_list_bookmark_path(@list), class: 'btn btn-warning' %>
-  <%= link_to 'Back to lists', lists_path, class: 'btn btn-success' %>
+<div class="banner mb-4" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(
+  <% if @list.photo.attached? %>
+    <%= cl_image_path @list.photo.key %>
+  <% else %>
+    <%= asset_path 'cinema.jpeg' %>
+  <% end %>);">
+  <div class="container">
+    <h1><%= @list.name %></h1>
+  </div>
+  <span class="badge rounded-pill text-bg-success"><%= @bookmarks.count %> movie<%= @bookmarks.count > 1 ? 's' : '' %></span>
 </div>
 
-<div class="row">
-  <% @bookmarks.each do |bookmark| %>
-    <div class="col-md-6 col-lg-4 col-xl-3">
-      <div class="card">
-        <img class="card-img-top" src="<%= Movie.find(bookmark.movie_id).poster_url %>" alt="Movie poster">
-        <div class="card-body">
-          <h5 class="card-title"><%= Movie.find(bookmark.movie_id).title %></h5>
-          <p class="card-text"><%= Movie.find(bookmark.movie_id).overview %></p>
-          <div class="d-flex justify-content-between align-items-center">
-            <p><%= bookmark.comment %></p>
-            <%= link_to 'delete', bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'text-danger' %>
+<div class="container">
+  <%= link_to 'Add a movie', new_list_bookmark_path(@list), class: 'btn btn-warning' %>
+  <%= link_to 'Back to lists', root_path, class: 'btn btn-success' %>
+  <div class="row">
+    <% @bookmarks.each do |bookmark| %>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card mb-4">
+          <img class="card-img-top img-fluid" src="<%= Movie.find(bookmark.movie_id).poster_url %>" alt="Movie poster">
+          <div class="card-body">
+            <h5 class="card-title"><%= Movie.find(bookmark.movie_id).title %></h5>
+            <p class="card-text"><%= Movie.find(bookmark.movie_id).overview %></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <p class='comment'><%= bookmark.comment %></p>
+              <%= link_to 'delete', bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'text-danger text-decoration-none' %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to 'Add a movie', new_list_bookmark_path(@list), class: 'btn btn-warning' %>
-<%= link_to 'Back to lists', lists_path, class: 'btn btn-success' %>
