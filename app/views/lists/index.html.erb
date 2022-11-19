@@ -1,4 +1,4 @@
-<div class="banner mb-4" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= asset_path 'cinema.jpeg' %>);">
+<div class="banner mb-4" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= asset_path 'cinema.jpg' %>);">
   <div class="container">
     <h1>Bookmark your favorite movies!</h1>
     <%= link_to 'Create a movie list', new_list_path, class: 'mt-3 btn btn-success' %>
@@ -14,7 +14,7 @@
             <% if list.photo.attached? %>
               <%= cl_image_path list.photo.key %>
             <% else %>
-              <%= asset_path 'cinema.jpeg' %>
+              <%= asset_path 'cinema.jpg' %>
             <% end %>);">
             <%= list.name %>
           </div>

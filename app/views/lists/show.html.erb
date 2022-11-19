@@ -2,7 +2,7 @@
   <% if @list.photo.attached? %>
     <%= cl_image_path @list.photo.key %>
   <% else %>
-    <%= asset_path 'cinema.jpeg' %>
+    <%= asset_path 'cinema.jpg' %>
   <% end %>);">
   <div class="container">
     <h1><%= @list.name %></h1>
